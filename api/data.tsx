@@ -1,6 +1,24 @@
 const DATA=[
   {
+    event_date: 1875,
+    event_title: "event title here",
+    event_desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati quisquam debitis porro veniam ratione reprehenderit quae officiis recusandae velit ducimus dolore cum quis cumque tempore exercitationem alias, eaque suscipit voluptate.",
+    event_img: "https://placehold.co/350x200",
+  },
+  {
     event_date: 1900,
+    event_title: "event title here",
+    event_desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati quisquam debitis porro veniam ratione reprehenderit quae officiis recusandae velit ducimus dolore cum quis cumque tempore exercitationem alias, eaque suscipit voluptate.",
+    event_img: "https://placehold.co/350x200",
+  },
+  {
+    event_date: 1905,
+    event_title: "event title here",
+    event_desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati quisquam debitis porro veniam ratione reprehenderit quae officiis recusandae velit ducimus dolore cum quis cumque tempore exercitationem alias, eaque suscipit voluptate.",
+    event_img: "https://placehold.co/350x200",
+  },
+  {
+    event_date: 1919,
     event_title: "event title here",
     event_desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati quisquam debitis porro veniam ratione reprehenderit quae officiis recusandae velit ducimus dolore cum quis cumque tempore exercitationem alias, eaque suscipit voluptate.",
     event_img: "https://placehold.co/350x200",
