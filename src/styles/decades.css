@@ -1,0 +1,10 @@
+h2 {
+  &::before {
+    content: "";
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    background: red;
+    display: inline-block;
+  }
+}
