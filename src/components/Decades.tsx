@@ -1,13 +1,14 @@
 import Events from "./Events";
-import DATA from '../../api/data';
-import { useMemo } from "react";
+// import DATA from '../../api/data';
+import { useEffect, useMemo, useState } from "react";
 import '../styles/decades.css';
 
 interface Event {
-    event_date: string,
-    event_title: string,
-    event_desc: string,
-    event_img: string,
+    id: number,
+    date: string,
+    title: string,
+    description: string,
+    image: string,
 }
 
 function toYear(value: string | number | Date) {
@@ -17,11 +18,11 @@ function toYear(value: string | number | Date) {
   return d.getFullYear();
 }
 
-function groupByDecade(data: any, start = 1900, bucketSize = 10) {
+function groupByDecade(events: any, start = 1900, bucketSize = 10) {
   // returns map like { "1900-1999": [items], "2000-2099": [...] }
   const groups = new Map();
-  data.forEach((event: Event) => {
-    const year = toYear(event.event_date);
+  events.forEach((event: Event) => {
+    const year = toYear(event.date);
     if (year === null) return; //skip invalid
     // compute decade bucket label covering ranges of 100 years starting at `start`
     const offset = Math.floor((year - start) / bucketSize) * bucketSize;
@@ -40,7 +41,20 @@ function groupByDecade(data: any, start = 1900, bucketSize = 10) {
 }
 
 export default function Decades() {
-  const grouped = useMemo(()=>groupByDecade(DATA, 1900, 10), []);
+  const [events, setEvents] = useState([]);
+
+  const getEventsData = async () => {
+    const response = await fetch("http://localhost:3000/events");
+    const result = await response.json();
+    setEvents(result);
+  }
+  
+  useEffect(()=>{
+    getEventsData();
+  }, []);
+  console.log(events);
+
+  const grouped = useMemo(()=>groupByDecade(events, 1900, 10), []);
   
   return (
     <>
@@ -49,8 +63,8 @@ export default function Decades() {
         <section key={label} className="mb-15">
           <h2 className="text-3xl">{label}</h2>
 
-            {items.map((it: any, i: number) => (
-              <Events key={i} it={it}/>
+            {items.map((it: any, id: number) => (
+              <Events key={id} it={it}/>
             ))}
 
         </section>
