@@ -4,18 +4,25 @@ import { useMemo } from "react";
 import '../styles/decades.css';
 
 interface Event {
-    event_date: number,
+    event_date: string,
     event_title: string,
     event_desc: string,
     event_img: string,
+}
+
+function toYear(value: string | number | Date) {
+  if (value instanceof Date) return value.getFullYear();
+  const d = new Date(value);
+  if (Number.isNaN(d)) return null;
+  return d.getFullYear();
 }
 
 function groupByDecade(data: any, start = 1900, bucketSize = 10) {
   // returns map like { "1900-1999": [items], "2000-2099": [...] }
   const groups = new Map();
   data.forEach((event: Event) => {
-    const year = Number(event.event_date);
-    if (Number.isNaN(year)) return;
+    const year = toYear(event.event_date);
+    if (year === null) return; //skip invalid
     // compute decade bucket label covering ranges of 100 years starting at `start`
     const offset = Math.floor((year - start) / bucketSize) * bucketSize;
     const bucketStart = start + offset;
@@ -42,8 +49,8 @@ export default function Decades() {
         <section key={label} className="mb-15">
           <h2 className="text-3xl">{label}</h2>
 
-            {items.map((it, i) => (
-              <Events />
+            {items.map((it: any, i: number) => (
+              <Events key={i} it={it}/>
             ))}
 
         </section>
